@@ -3595,3 +3595,138 @@ weighted avg       1.00      1.00      1.00     56960
    macro avg       0.92      0.92      0.92     56960
 weighted avg       1.00      1.00      1.00     56960
 ################################################################
+model: Randomforests, scale: standard, feature engineering: 1 ,model params: {'max_depth': 15, 'max_features': 'log2', 'min_samples_leaf': 7, 'min_samples_split': 12, 'n_estimators': 100, 'n_jobs': -1, 'random_state': 17, 'verbose': 2} 
+oversampling type : tsmote 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    170137
+           1       0.99      0.85      0.91      1699
+
+    accuracy                           1.00    171836
+   macro avg       0.99      0.92      0.96    171836
+weighted avg       1.00      1.00      1.00    171836
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56870
+           1       0.92      0.84      0.88        90
+
+    accuracy                           1.00     56960
+   macro avg       0.96      0.92      0.94     56960
+weighted avg       1.00      1.00      1.00     56960
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56863
+           1       0.85      0.86      0.85        97
+
+    accuracy                           1.00     56960
+   macro avg       0.92      0.93      0.93     56960
+weighted avg       1.00      1.00      1.00     56960
+################################################################
+model: Randomforests, scale: standard, feature engineering: 1 ,model params: {'max_depth': 15, 'max_features': 'log2', 'min_samples_leaf': 7, 'min_samples_split': 15, 'n_estimators': 100, 'n_jobs': -1, 'random_state': 17, 'verbose': 2} 
+oversampling type : tsmote 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    170137
+           1       0.99      0.84      0.91      1699
+
+    accuracy                           1.00    171836
+   macro avg       0.99      0.92      0.95    171836
+weighted avg       1.00      1.00      1.00    171836
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56870
+           1       0.92      0.84      0.88        90
+
+    accuracy                           1.00     56960
+   macro avg       0.96      0.92      0.94     56960
+weighted avg       1.00      1.00      1.00     56960
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56863
+           1       0.84      0.86      0.85        97
+
+    accuracy                           1.00     56960
+   macro avg       0.92      0.93      0.92     56960
+weighted avg       1.00      1.00      1.00     56960
+################################################################
+model: Randomforests, scale: standard, feature engineering: 1 ,model params: {'max_depth': 15, 'max_features': 'log2', 'min_samples_leaf': 7, 'min_samples_split': 15, 'n_estimators': 100, 'n_jobs': -1, 'random_state': 17, 'verbose': 2} 
+oversampling type : tsmote 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    170137
+           1       0.99      0.84      0.91      1699
+
+    accuracy                           1.00    171836
+   macro avg       0.99      0.92      0.95    171836
+weighted avg       1.00      1.00      1.00    171836
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56870
+           1       0.92      0.84      0.88        90
+
+    accuracy                           1.00     56960
+   macro avg       0.96      0.92      0.94     56960
+weighted avg       1.00      1.00      1.00     56960
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56863
+           1       0.84      0.87      0.85        97
+
+    accuracy                           1.00     56960
+   macro avg       0.92      0.93      0.93     56960
+weighted avg       1.00      1.00      1.00     56960
+################################################################
+model: Voting Classifier, scale: standard, feature engineering: 1 ,model params: None 
+oversampling type : tsmote 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    170137
+           1       0.97      0.81      0.88      1699
+
+    accuracy                           1.00    171836
+   macro avg       0.98      0.91      0.94    171836
+weighted avg       1.00      1.00      1.00    171836
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56870
+           1       0.87      0.81      0.84        90
+
+    accuracy                           1.00     56960
+   macro avg       0.93      0.91      0.92     56960
+weighted avg       1.00      1.00      1.00     56960
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56863
+           1       0.79      0.86      0.82        97
+
+    accuracy                           1.00     56960
+   macro avg       0.90      0.93      0.91     56960
+weighted avg       1.00      1.00      1.00     56960
+################################################################
+model: Voting Classifier, scale: standard, feature engineering: 1 ,model params: None 
+oversampling type : tsmote 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    170137
+           1       0.97      0.80      0.88      1699
+
+    accuracy                           1.00    171836
+   macro avg       0.98      0.90      0.94    171836
+weighted avg       1.00      1.00      1.00    171836
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56870
+           1       0.84      0.80      0.82        90
+
+    accuracy                           1.00     56960
+   macro avg       0.92      0.90      0.91     56960
+weighted avg       1.00      1.00      1.00     56960
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     56863
+           1       0.77      0.86      0.81        97
+
+    accuracy                           1.00     56960
+   macro avg       0.88      0.93      0.90     56960
+weighted avg       1.00      1.00      1.00     56960
+################################################################
