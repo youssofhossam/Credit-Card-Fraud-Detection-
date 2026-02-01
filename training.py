@@ -1,10 +1,13 @@
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import precision_recall_curve
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.neural_network import MLPClassifier
 from types import SimpleNamespace
+from config_utils import save_params
 
 def logistic_regression(train, target_train, val, target_val, test, target_test,random_state, kfold):
     model = LogisticRegression()
@@ -14,17 +17,20 @@ def logistic_regression(train, target_train, val, target_val, test, target_test,
         'C':[1.0, .1, .001],
         'class_weight': ['balanced', None],
         'solver' : ['lbfgs', 'liblinear'],
-        'max_iter' :[1000]
+        'max_iter' :[1000],
+        'random_state': [random_state],
+        'n_jobs': [-1]
     }
     grid_search = GridSearchCV(model, param_grid=param, scoring='f1', n_jobs=-1,cv=stratified_kfold,verbose=3)
     grid_search.fit(train, target_train)
     best_params = grid_search.best_params_
     print(f'best params for Logistic Regression are {best_params}')
-    model = LogisticRegression(**best_params, random_state=random_state)
+    model = LogisticRegression(**best_params)
     model.fit(train,target_train)
     pred_train = model.predict(train)
     pred_val = model.predict(val)
     pred_test = model.predict(test)
+    save_params('Logistic Regression', best_params)
     return SimpleNamespace(best_params = best_params,pred_train = pred_train, pred_val=pred_val, pred_test=pred_test,model_name =  'logistic regression', model = model)
 
 def neural_network(train,target_train,val, target_val,test, target_test,random_state, kfold):
@@ -48,7 +54,7 @@ def neural_network(train,target_train,val, target_val,test, target_test,random_s
         'learning_rate_init':[.001],
         'learning_rate':['adaptive'],
         'verbose':[2],
-    }
+        'random_state': [random_state]    }
  
     stratified_kfold = StratifiedKFold(random_state=random_state, shuffle=True, n_splits=kfold)
     gridsearch = GridSearchCV(param_grid=params, scoring='f1',estimator=model, n_jobs=-1, cv=stratified_kfold)
@@ -58,7 +64,9 @@ def neural_network(train,target_train,val, target_val,test, target_test,random_s
     model.fit(train,target_train)
     pred_train = model.predict(train)
     pred_val = model.predict(val)
-    pred_test= model.predict(test)  
+    pred_test= model.predict(test) 
+    save_params('Neural Network', best_params)
+
     return SimpleNamespace(best_params = best_params,pred_train = pred_train, pred_val=pred_val, pred_test=pred_test,model_name =  'NN', model = model)
 
 
@@ -83,6 +91,8 @@ def random_forests(train,target_train, val, target_val, test, target_test, rando
     pred_train = model.predict(train)
     pred_val = model.predict(val)
     pred_test = model.predict(test)
+    save_params('Random Forest', best_params)
+
     return SimpleNamespace(best_params = best_params,pred_train = pred_train, pred_val=pred_val, pred_test=pred_test,model_name =  'Randomforests', model = model)
 
 def voting_classifier(train,target_train, val, target_val, test, target_test, random_state, kfold):
@@ -124,6 +134,25 @@ def voting_classifier(train,target_train, val, target_val, test, target_test, ra
     pred_val = voting_clf.predict(val)
     pred_test = voting_clf.predict(test)
     return SimpleNamespace(pred_train = pred_train,pred_val=pred_val,pred_test=pred_test,model_name = "Voting Classifier",model = voting_clf)
+
+def feature_importance(train_df, target_train_df):
+    from sklearn.ensemble import RandomForestClassifier
+    rf_imp = RandomForestClassifier(
+        n_estimators=100,
+        max_depth=9,
+        n_jobs=-1,
+        max_features='log2',
+        random_state=17
+    )
+    rf_imp.fit(train_df,target_train_df)
+    imp = rf_imp.feature_importances_
+    feature_imp = pd.DataFrame({'Feature' : train_df.columns, 'Importance' : imp})
+    feature_imp = feature_imp.sort_values(by='Importance', ascending=True)
+
+    plt.figure(figsize=(15,8))
+    plt.barh(feature_imp['Feature'], feature_imp['Importance'])
+    plt.gca()
+    plt.show()
 
 
 def pred_with_threshold(model, train, target_train,val, target_val,test, target_test):

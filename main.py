@@ -6,13 +6,21 @@ from types import SimpleNamespace
 from training import logistic_regression , neural_network, random_forests, voting_classifier, pred_with_threshold
 from data_utils import convert_numpy, load_data, handle_features, scale_data, balance_data
 import pandas as pd
-
-
+from config_utils import load_params
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, VotingClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
+from evaluation import evaluate_test
+import joblib
+import os
+import numpy
 random_state = 17
 k_fold = 5
 models = []
 threshold_models = []
-def load_models(train, val, test, target_train,target_val,target_test):
+
+def run_models(train, val, test, target_train,target_val,target_test):
     lr = logistic_regression(train=train,val=val,test=test,target_train=target_train,target_val=target_val,target_test=target_test,random_state=random_state,kfold=k_fold)
     nn = neural_network(train=train,val=val,test=test,target_train=target_train,target_val=target_val,target_test=target_test,random_state=random_state,kfold=k_fold)
     rf = random_forests(train=train,val=val,test=test,target_train=target_train,target_val=target_val,target_test=target_test,random_state=random_state,kfold=k_fold)
@@ -27,7 +35,7 @@ def load_models(train, val, test, target_train,target_val,target_test):
     threshold_models.append(lr_opt)
     threshold_models.append(nn_opt)
     threshold_models.append(rf_opt)
-
+    return rf.model
 def compare_models(models,train, val, test, target_train,target_val,target_test):
     precision = []
     recall = []
@@ -67,15 +75,58 @@ def compare_models(models,train, val, test, target_train,target_val,target_test)
     plt.tight_layout()
     plt.show()
 
+def run(model_name, test,target_test,train,target_train):
+    saved_params = load_params(model_name)
+    if(model_name == 'Logistic Regression'):
+        model = LogisticRegression(**saved_params)
+    elif(model_name == 'Neural Network'):
+        model = MLPClassifier(**saved_params)
+    elif(model_name == 'Random Forest'):
+        model = RandomForestClassifier(**saved_params)
+    elif(model_name == 'Voting classifier'):
+        vc= voting_classifier(train=train,val=val,test=test,target_train=target_train,target_val=target_val,target_test=target_test,random_state=random_state,kfold=k_fold)
+        print(evaluate_test(pred_test=vc.pred_test,target_test=target_test))
+    else:
+        print('This Model is not present')
+    model.fit(train,target_train)
+    pred_test = model.predict(test)
+    print(evaluate_test(pred_test=pred_test,target_test=target_test))
+
+def deploy_model(train,val,test,target_train,target_val,target_test, scaler):
+    test_sample =test.sample(50, random_state)
+    test_sample['Class']= target_test.loc[test_sample.index]
+    test_sample.to_csv('test_sample.csv', index=False)
+    print('test_sample saved')
+    final_model =run_models(train,val,test,target_train,target_val,target_test)
+    path = 'final_fraud_model.pkl'
+    joblib.dump({
+        'model': final_model,
+        'scaler': scaler
+    }, path)
+
+   
+
+def load_model(test_case, path):
+    data = joblib.load(path)
+    model = data['model']
+    scaler = data['scaler']
+    scaled_test_case = scaler.transform(test_case)
+    print(evaluate_test(model=model, pred_test=scaled_test_case, train=train,val=val, target_train=target_train,target_val=target_val,target_test=target_test))
+
 if (__name__ == '__main__'):
     train_df,val_df,test_df,train_val_df,target_train_df,target_val_df,target_test_df = load_data()
     handeld_features = 0
     train_df,val_df,test_df, handeld_features = handle_features(train_df,val_df,test_df)
     smote_type = None
     train,val,test,target_train,target_val,target_test = convert_numpy(train_df,val_df,test_df,target_train_df,target_val_df,target_test_df)
-    train,val,test, processor_name = scale_data('standard', train,val,test)
+    train,val,test, processor_name,scaler = scale_data('standard', train,val,test)
     train,target_train, smote_type = balance_data('tsmote', .01, train, target_train,version=2) 
 
-    load_models(train,val,test,target_train,target_val,target_test)
-
-    compare_models(models=models,train=train,val=val,test=test,target_train=target_train,target_val=target_val,target_test=target_test)
+    path = 'final_fraud_model.pkl'
+    
+    # deploy_model(train,val,test,target_train,target_val,target_test, scaler = scaler)
+    # test_case =test[2]
+    # load_model(test_case=[test_case], path=path)
+    # run('Logistic Regression', test=test, target_test=target_test, train=train,target_train=target_train)
+    
+    # compare_models(models=models,train=train,val=val,test=test,target_train=target_train,target_val=target_val,target_test=target_test)

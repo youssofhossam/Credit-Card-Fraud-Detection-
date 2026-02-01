@@ -23,6 +23,12 @@ def load_data():
     train_df = train_df.drop(columns=['Class'])
     val_df = val_df.drop(columns=['Class'])
     test_df = test_df.drop(columns=['Class'])
+
+    test_sample_df = test.copy()
+    test_sample_df['Class'] = target_test_df
+    target_test_sample_df = target_test_df
+    fraud_data = test_sample_df[test_df]
+    
     return train_df,val_df,test_df,train_val_df,target_train_df,target_val_df,target_test_df
 
 def handle_features(train_df, val_df, test_df):
@@ -53,7 +59,7 @@ def scale_data(choice, train, val, test):
     new_train = scaler.fit_transform(train)
     new_val = scaler.transform(val)
     new_test = scaler.transform(test)
-    return new_train, new_val,new_test, choice
+    return new_train, new_val,new_test, choice,scaler
 
 ### Handle imbalance
 def standard_smote(sampling_strategy, random_state, train, target_train):
