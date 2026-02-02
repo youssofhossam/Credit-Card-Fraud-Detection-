@@ -75,14 +75,13 @@ The project is organized as follows:
    cd fraud-detection-app 
    ```
    
-2. **Install dependencies
+2. **Install dependencies**
     ```bash
     pip install -r requirements.txt
     ```
-3. **Run the app
+3. **Run the app**
     ```bash
     streamlit run app.py
     ```
 
-🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+🤝 Contributions are welcome! Please feel free to submit a Pull Request.
