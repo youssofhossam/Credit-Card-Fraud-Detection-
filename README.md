@@ -15,7 +15,7 @@ Check out the live web application here:
 
 ## ✨ Key Features
 * **⚖️ Imbalance Handling:** Used **SMOTE** (Synthetic Minority Over-sampling Technique) and Under-sampling to balance the training data.
-* **🤖 Advanced Modeling:** Compared Logistic Regression, Random Forest, and Voting Classifiers.
+* **🤖 Advanced Modeling:** Compared Logistic Regression, Neural Network, Random Forest, and Voting Classifiers.
 * **🎯 Threshold Tuning:** Optimized the decision threshold (from 0.5 to ~0.1) to prioritize **Recall**, ensuring fewer fraud cases slip through.
 * **📊 Interactive Dashboard:** A **Streamlit** web app allowing users to simulate transactions and visualize risk probabilities in real-time.
 * **⚙️ Configurable:** Uses JSON configuration files for reproducible hyperparameter tuning.
@@ -34,33 +34,52 @@ Check out the live web application here:
 ## 📸 Screenshots
 
 ### 1. The Interactive App
-![App Screenshot](screenshots/app_demo.png)
+![App Screenshot](Screenshots/app_demo.png)
 
 ### 2. Feature Importance
-![Feature Importance](screenshots/feature_importance.png)
+![Feature Importance](Screenshots/feature_imp.png)
 
 ## 📂 Project Structure
 This project follows a production-ready directory structure:
 
 ```text
-├── data/                  # Raw and processed dataset files
-├── models/                # Saved models (joblib/pkl files)
-├── screenshots/           # Images and Videos for README
-│   ├── app_demo.png       # Screenshot of the Web App
-│   ├── feature_imp.png    # Feature Importance Graph
-│   └── demo_video.mp4     # Recorded walkthrough
-├── src/                   # Source code modules
-│   ├── data_utils.py      # Data cleaning and SMOTE functions
-│   ├── training.py        # Model training scripts
-│   └── evaluation.py      # Confusion matrix and metric plots
-├── app.py                 # Main Streamlit Application script
-├── config.json            # Hyperparameters and file paths
-├── requirements.txt       # Python dependencies list
-└── README.md              # Project Documentation
+## 📂 Project Structure
+
+The project is organized as follows:
+
+```text
+├── Dataset/                 # Folder containing the original CSV datasets
+├── Screenshots/             # Images used for this README (App demo, etc.)
+│
+├── app.py                   # Main Streamlit application script
+├── main.py                  # Orchestrator script to run the full pipeline
+├── training.py              # Logic for training the Random Forest model
+├── evaluation.py            # Functions for plotting and metrics
+├── data_utils.py            # Data cleaning and SMOTE processing functions
+├── config_utils.py          # Utilities for managing configuration settings
+│
+├── EDA.ipynb                # Jupyter Notebook for Exploratory Data Analysis
+├── final_fraud_model.pkl    # The saved trained model (ready for deployment)
+├── best_hyperparameters.json # Optimized parameters found during tuning
+├── classification_reports.txt # Text file containing detailed performance metrics
+├── test_sample.csv          # Sample data used by the Streamlit App for testing
+│
+├── requirements.txt         # List of Python dependencies
+└── README.md                # Project documentation         # Project Documentation
 
 ## 💻 How to Run Locally
 
 1. **Clone the repository**
    ```bash
    git clone [https://github.com/youssofhossam/Credit-Card-Fraud-Detection-.git](https://github.com/youssofhossam/Credit-Card-Fraud-Detection-.git)
-   cd fraud-detection-app
+   cd fraud-detection-app 
+   
+2. **Install dependencies
+    ```bash
+    pip install -r requirements.txt
+3. **Run the app
+    ```bash
+    streamlit run app.py
+
+🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
