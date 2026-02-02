@@ -66,20 +66,23 @@ The project is organized as follows:
 │
 ├── requirements.txt         # List of Python dependencies
 └── README.md                # Project documentation         # Project Documentation
-
+```
 ## 💻 How to Run Locally
 
 1. **Clone the repository**
    ```bash
    git clone [https://github.com/youssofhossam/Credit-Card-Fraud-Detection-.git](https://github.com/youssofhossam/Credit-Card-Fraud-Detection-.git)
    cd fraud-detection-app 
+   ```
    
 2. **Install dependencies
     ```bash
     pip install -r requirements.txt
+    ```
 3. **Run the app
     ```bash
     streamlit run app.py
+    ```
 
 🤝 Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
