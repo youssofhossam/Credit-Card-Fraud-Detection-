@@ -11,7 +11,7 @@ The dataset is highly imbalanced (only 0.17% fraud). Standard accuracy metrics a
 
 ## 🚀 Live Demo
 Check out the live web application here:  
-👉 **[Link to your Streamlit App](https://n2wi4rxys3ju2ubqds6yy8.streamlit.app/)** 
+👉 **[Link to the Streamlit App](https://n2wi4rxys3ju2ubqds6yy8.streamlit.app/)** 
 
 ## ✨ Key Features
 * **⚖️ Imbalance Handling:** Used **SMOTE** (Synthetic Minority Over-sampling Technique) and Under-sampling to balance the training data.
