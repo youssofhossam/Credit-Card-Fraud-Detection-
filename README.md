@@ -7,6 +7,10 @@
 ## 📌 Project Overview
 This project is a machine learning solution designed to detect fraudulent credit card transactions. 
 
+## 📄 Project Report
+For a detailed explanation of the methodology, mathematical concepts, and full evaluation, please refer to the final report:
+👉 **[Read the Full Project Report](Final_Report.pdf)**
+
 The dataset is highly imbalanced (only 0.17% fraud). Standard accuracy metrics are misleading, so this project focuses on **Recall** and **Precision-Recall Trade-offs**. We implemented an advanced **Ensemble Learning** approach and a custom **Threshold Optimization** technique to catch more fraud cases than standard models.
 
 ## 🚀 Live Demo
@@ -41,9 +45,6 @@ Check out the live web application here:
 
 ## 📂 Project Structure
 This project follows a production-ready directory structure:
-
-```text
-The project is organized as follows:
 
 ```text
 ├── Dataset/                 # Folder containing the original CSV datasets
