@@ -11,7 +11,7 @@ The dataset is highly imbalanced (only 0.17% fraud). Standard accuracy metrics a
 
 ## 🚀 Live Demo
 Check out the live web application here:  
-👉 **[Link to your Streamlit App](https://share.streamlit.io/your-username/your-repo)** *(Replace this link after you deploy!)*
+👉 **[Link to your Streamlit App](https://n2wi4rxys3ju2ubqds6yy8.streamlit.app/)** 
 
 ## ✨ Key Features
 * **⚖️ Imbalance Handling:** Used **SMOTE** (Synthetic Minority Over-sampling Technique) and Under-sampling to balance the training data.
@@ -43,8 +43,6 @@ Check out the live web application here:
 This project follows a production-ready directory structure:
 
 ```text
-## 📂 Project Structure
-
 The project is organized as follows:
 
 ```text
@@ -72,8 +70,8 @@ The project is organized as follows:
 1. **Clone the repository**
    ```bash
    git clone [https://github.com/youssofhossam/Credit-Card-Fraud-Detection-.git](https://github.com/youssofhossam/Credit-Card-Fraud-Detection-.git)
-   cd fraud-detection-app 
-   ```
+    cd Credit-Card-Fraud-Detection-   
+    ```
    
 2. **Install dependencies**
     ```bash
