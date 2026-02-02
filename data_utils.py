@@ -24,10 +24,18 @@ def load_data():
     val_df = val_df.drop(columns=['Class'])
     test_df = test_df.drop(columns=['Class'])
 
-    test_sample_df = test.copy()
+    test_sample_df = test_df.copy()
     test_sample_df['Class'] = target_test_df
-    target_test_sample_df = target_test_df
-    fraud_data = test_sample_df[test_df]
+    fraud_data_df = test_sample_df[test_sample_df['Class'] == 1]
+    legi_data_df = test_sample_df[test_sample_df['Class'] == 0]
+    n_fruad = 25
+    n_legi = 25
+    sampled_fraud_df = fraud_data_df.sample(n=n_fruad, random_state=random_state)
+    sampled_legi_df = legi_data_df.sample(n=n_legi, random_state=random_state)
+
+    final_sample_df = pd.concat([sampled_fraud_df, sampled_legi_df]).sample(frac=1, random_state=random_state)
+    final_sample_df.to_csv('test_sample.csv',index=False)
+
     
     return train_df,val_df,test_df,train_val_df,target_train_df,target_val_df,target_test_df
 

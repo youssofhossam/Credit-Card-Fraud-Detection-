@@ -168,3 +168,14 @@ def pred_with_threshold(model, train, target_train,val, target_val,test, target_
     pred_val_opt = (pred_val_propa >= optimal_threshold).astype(int)
     pred_test_opt = (pred_test_propa >= optimal_threshold).astype(int)
     return SimpleNamespace(pred_train_opt = pred_train_opt, pred_val_opt = pred_val_opt,pred_test_opt = pred_test_opt, optimal_threshold= optimal_threshold)
+
+def pred_threshold_inf(model, test, val, target_val):
+    pred_val_propa = model.predict_proba(val)[:,1]
+    pred_test_propa = model.predict_proba(test)[:,1]
+    
+    precision_val, recall_val, thresholds = precision_recall_curve(target_val,pred_val_propa)
+    f1_scores = (2 * precision_val * recall_val) / (precision_val + recall_val)
+    best_idx = np.argmax(f1_scores)
+    optimal_threshold = thresholds[best_idx]
+    pred_test_opt = (pred_test_propa >= optimal_threshold).astype(int)
+    return SimpleNamespace(pred_test_opt = pred_test_opt, optimal_threshold= optimal_threshold)
