@@ -17,6 +17,10 @@ The dataset is highly imbalanced (only 0.17% fraud). Standard accuracy metrics a
 Check out the live web application here:  
 👉 **[Link to the Streamlit App](https://n2wi4rxys3ju2ubqds6yy8.streamlit.app/)** 
 
+## Data set
+Check out the Data set here 
+👉 **[Data set](https://drive.google.com/drive/folders/1_aVJF5BPTppdP3UO8k8Aev26FObxQIJt?usp=sharing)**
+
 ## ✨ Key Features
 * **⚖️ Imbalance Handling:** Used **SMOTE** (Synthetic Minority Over-sampling Technique) and Under-sampling to balance the training data.
 * **🤖 Advanced Modeling:** Compared Logistic Regression, Neural Network, Random Forest, and Voting Classifiers.
