@@ -2,15 +2,21 @@ import streamlit as st
 import joblib
 import pandas as pd
 import numpy as np
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+model_path = os.path.join(project_root, 'final_fraud_model.pkl')
+test_path = os.path.join(project_root,'test_sample.csv')
 
 @st.cache_resource
 def load_assets():
-    data = joblib.load('final_fraud_model.pkl')
+    data = joblib.load(model_path)
     return data['model'], data['scaler']
 
 model, scaler = load_assets()
 threshold = .5
-test_samples = pd.read_csv("test_sample.csv")
+test_samples = pd.read_csv(test_path)
 
 st.title("🛡️ Credit Card Fraud Detection System")
 st.write("This system uses a Random Forest Classifier with an optimized decision threshold to detect fraudulent transactions.")

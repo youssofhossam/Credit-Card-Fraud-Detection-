@@ -54,12 +54,13 @@ This project follows a production-ready directory structure:
 ├── Dataset/                 # Folder containing the original CSV datasets
 ├── Screenshots/             # Images used for this README (App demo, etc.)
 │
-├── app.py                   # Main Streamlit application script
-├── main.py                  # Orchestrator script to run the full pipeline
-├── training.py              # Logic for training the Random Forest model
-├── evaluation.py            # Functions for plotting and metrics
-├── data_utils.py            # Data cleaning and SMOTE processing functions
-├── config_utils.py          # Utilities for managing configuration settings
+├── src/                     # Source code folder
+│   ├── app.py               # Main Streamlit application script
+│   ├── main.py              # Orchestrator script to run the full pipeline
+│   ├── training.py          # Logic for training the Random Forest model
+│   ├── evaluation.py        # Functions for plotting and metrics
+│   ├── data_utils.py        # Data cleaning and SMOTE processing functions
+│   └── config_utils.py      # Utilities for managing configuration settings
 │
 ├── EDA.ipynb                # Jupyter Notebook for Exploratory Data Analysis
 ├── final_fraud_model.pkl    # The saved trained model (ready for deployment)
@@ -68,7 +69,7 @@ This project follows a production-ready directory structure:
 ├── test_sample.csv          # Sample data used by the Streamlit App for testing
 │
 ├── requirements.txt         # List of Python dependencies
-└── README.md                # Project documentation         # Project Documentation
+└── README.md                # Project documentation
 ```
 ## 💻 How to Run Locally
 
